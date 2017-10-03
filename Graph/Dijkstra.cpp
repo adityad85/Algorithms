@@ -53,20 +53,20 @@ void Dijkstra(int s)
     D[s]=0;
     priority_queue<pii,vector<pii>,comp>q;
     q.push(pii(s,0));
-    while(!q.empty())
+    while(!q.empty())//Time = V.log(V) + |E|log(V)=(|E|+|V|)log(V)
     {
         u=q.top().F;
-        q.pop();
+        q.pop();//This will cause O(log V)
         if(V[u])continue;
-       // int size_node=G[u].size();
-        for(auto e:G[u])
+        // int size_node=G[u].size();
+        for(auto e:G[u])//|E| times
         {
             v=e.F;
             w=e.S;
             if(!V[v]&&D[u]+w<D[v])
             {
                 D[v]=D[u]+w;
-                q.push(pii(v,D[v]));
+                q.push(pii(v,D[v]));//Decrease Key causes it to be O(log(V))
             }
         }
         V[u]=1;//done with node u
@@ -75,6 +75,15 @@ void Dijkstra(int s)
 /*
 This is Dijkstra for the weighted ,undirected graph that gives the single source
 shortest distance to all the available nodes.
+*/
+/*Dijkstra's Algorithm
+	 Problem (informal): Given a weighted graph G, source u and sink v, find minimally weighted u~v path in G
+
+	 Algorithm: BFS with priority queue; maintains distance to certain node and updates along with previous
+
+	 Complexity:
+	 	* Time - O((|E|+|V|)log|V|) where V is set of vertices and E is set of edges
+	 	* Space - O(|V|) to store visited vertices
 */
 int main()
 {
