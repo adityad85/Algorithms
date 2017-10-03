@@ -33,12 +33,6 @@ int mpow(int base, int exp);
 void ipgraph(int m);
 const int mod = 1000000007;
 //=======================
-struct Graph
-{
-    int head;
-    long cost;
-};
-using SingleSp = vector<long>;
 #define MAX 100001
 vector<pii>G[MAX];
 int D[MAX];
