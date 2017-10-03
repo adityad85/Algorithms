@@ -37,7 +37,7 @@ const int mod = 1000000007;
 vector<pii>G[MAX];
 int D[MAX];
 bool V[MAX];
-struct comp
+struct comp  // for the sake of making it min-heap ,my priority queue,> if it's this way it means min heap, if its > then it means max heap
 {
     bool operator()(const pii &a,const pii &b)
     {
@@ -58,11 +58,11 @@ void Dijkstra(int s)
         u=q.top().F;
         q.pop();
         if(V[u])continue;
-        int size_node=G[u].size();
-        for(int i=0; i<size_node; i++)
+       // int size_node=G[u].size();
+        for(auto e:G[u])
         {
-            v=G[u][i].F;
-            w=G[u][i].S;
+            v=e.F;
+            w=e.S;
             if(!V[v]&&D[u]+w<D[v])
             {
                 D[v]=D[u]+w;
@@ -78,14 +78,14 @@ shortest distance to all the available nodes.
 */
 int main()
 {
-    ios_base::sync_with_stdio(false);
+    ios_base::sync_with_stdio(false);//basically to not sync with the c and c++ stream
     cin.tie(NULL);
     int i,u,v,w,start;
     cin>>nodes>>edges;
     fo(i,edges)
     {
         cin>>u>>v>>w;
-        G[u].pb(pii(v,w));
+        G[u].pb(pii(v,w));//from 'u' to 'v' with weight 'w'
         G[v].pb(pii(u,w));//for undirected graph
     }
     cin>>start;
