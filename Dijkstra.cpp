@@ -65,6 +65,7 @@ void Dijkstra(int s)
         q.pop();
         if(V[u])continue;
         int size_node=G[u].size();
+        for(int i=0; i<size_node; i++)
         {
             v=G[u][i].F;
             w=G[u][i].S;
@@ -79,6 +80,7 @@ void Dijkstra(int s)
 }
 /*
 This is Dijkstra for the weighted ,undirected graph that gives the single source
+shortest distance to all the available nodes.
 */
 int main()
 {
@@ -94,6 +96,7 @@ int main()
     }
     cin>>start;
     Dijkstra(start);
+    for(int i=1; i<=nodes; i++)cout<<i<<" "<<D[i]<<endl;
     return 0;
 }
 
