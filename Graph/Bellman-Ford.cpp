@@ -43,6 +43,17 @@ that it is required as if there's a way from one node to another, then i'm going
 and i don't care how many times should my program repeat it .
 but just adding a simple case if it's greater than (n-1) stop immediately.
 
+This piece of code is so beautiful ,that it will stop as soon as the relaxations stop.
+*/
+
+/*Bellman-Ford Algorithm
+	 Problem (informal): Given a weighted graph G, source u and sink v, find minimally weighted u~v path in G
+
+	 Algorithm: Iterates over all vertices and edges and relaxes edges
+
+	 Complexity:
+	 	* Time - O(|V|*|E|) since main loop iterates over all vertices and edges
+	 	* Space - O(|V| + |E|) to store edges and vertices
 */
 int BellmanFord(int s)
 {
@@ -75,7 +86,7 @@ int main()
     cin.tie(NULL);
     int i,u,v,w,start;
     cin>>nodes>>edges;
-    fo(i,nodes)
+    fo(i,edges)
     {
         cin>>u>>v>>w;
         G[u].pb(pii(v,w));
