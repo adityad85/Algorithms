@@ -33,11 +33,20 @@ int mpow(int base, int exp);
 void ipgraph(int m);
 const int mod = 1000000007;
 //=======================
+/*Mergesort
+	 Problem (informal): Given collection of objects, return sorted collection
+
+	 Algorithm: Divide and conquer approach -- split array into two subarrays, mergesort subarrays, and merge subarrays
+
+	 Complexity:
+	 	* Time - O(n log n), asymptotically tight since T(n) = 2T(n/2) ==> O(nlogn) via Master Theorem
+	 	* Space - O(n) to store subarraays
+*/
 void merge1(vl &a,int l,int m,int r)
 {
     int n1=m-l+1,i;
     int n2=r-m;
-    vector<long long>L(n1),R(n2);
+    vl L(n1),R(n2);
     fo(i,n1)L[i]=a[l+i];
     fo(i,n2)R[i]=a[m+1+i];
     int j=0,k=l,p=0;
