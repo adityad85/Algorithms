@@ -34,7 +34,15 @@ void ipgraph(int m);
 const int mod = 1000000007;
 //=======================
 
+/*Insertion Sort
+	 Problem (informal): Given collection of objects, return sorted collection
 
+	 Algorithm: insert element in correct position in sorted array starting from initially zero array length
+
+	 Complexity:
+	 	* Time - O(n^2) worse/average case, O(n) best case if initially sorted
+	 	* Space - O(1) since no additional storage needed
+*/
 int main()
 {
 	ios_base::sync_with_stdio(false);
@@ -42,13 +50,15 @@ int main()
 	vl asq;
 	long long n,i,j,q;
 	cin>>n;
-	for(int i=0;cin>>q;){
+	for(int i=0;cin>>q;)//use any character input it will stop the loop
+        {
         asq.pb(q);
 	}
 	fo(i,n){
 	    int k=asq[i];
 	    j=i-1;
-	    while(j>=0&&k<asq[j]){
+	    while(j>=0&&k<asq[j])//this is done to just keep inserting the elements and allow it to put in the right position
+	    {
             asq[j+1]=asq[j];
             j--;
 	    }
