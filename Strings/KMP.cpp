@@ -35,7 +35,14 @@ int mpow(int base, int exp);
 void ipgraph(int m);
 const int mod = 1000000007;
 //=======================
-void lpb(string a,vl &l)
+
+/*
+    Study :- http://keithschwarz.com/interesting/code/?dir=knuth-morris-pratt
+
+
+
+*/
+void lpb(string a,vl &l) // Longest Proper Boundary
 {
     int len=0,i=1;
     l[0]=0;
