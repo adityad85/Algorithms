@@ -39,7 +39,18 @@ const int mod = 1000000007;
 /*
     Study :- http://keithschwarz.com/interesting/code/?dir=knuth-morris-pratt
 
+    Knuth-Morris-Pratt
+	 Problem (informal): Given strings text and pattern, determine wheter pattern occurs within text
 
+	 Algorithm: Naive algorithm with optimal shifting (length of longest proper prefix that is also a proper suffix)
+
+	 Complexity:
+	 	* Time - O(n+k) since preprocessing is O(k) and online portion is O(n) where n is pattern length and k is text length
+	 	* Space - O(n+k) since both pattern and text must be stored
+
+	 Note:
+	 	* Although KMP is asymptotically faster, Boyer-Moore is sublinear in practice due to natural ordering of letters
+		* Iterative implementation is ~10x faster than DFA
 
 */
 void lpb(string a,vl &l) // Longest Proper Boundary
@@ -57,7 +68,7 @@ void lpb(string a,vl &l) // Longest Proper Boundary
         }
         else
         {
-            if(len!=0)
+            if(len!=0) //go back one step then keep going back until a match or zero
             {
                 len=l[i-1];
             }
@@ -71,8 +82,8 @@ void lpb(string a,vl &l) // Longest Proper Boundary
 }
 void kmp(string p,string t)
 {
-    int n=p.length();
-    int m=t.length();
+    int n=p.length();//pattern len
+    int m=t.length();//text len
     vl l(n);
     lpb(p,l);
     int i=0,j=0;
