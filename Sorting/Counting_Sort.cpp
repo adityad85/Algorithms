@@ -51,11 +51,11 @@ int main()
     cin.tie(NULL);
 
     vl a;
-    int i,d,min1;
+    int i,d;
     while(cin>>d)
     {
         a.pb(d);
-        min1=max(d,min1);
+
     }
     vl b(a.size()+1,0),c(a.size()+1,0);
     fo(i,a.size())b[a[i]]++;
