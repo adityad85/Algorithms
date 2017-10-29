@@ -35,7 +35,15 @@ int mpow(int base, int exp);
 void ipgraph(int m);
 const int mod = 1000000007;
 //=======================
+/*Counting Sort
+	 Problem (informal): Given collection of integers, return sorted collection
 
+	 Algorithm: Use hash table to store frequency of each integer in range [-k, k] for k = max(|min|, max) then iterate over table and output
+
+	 Complexity:
+	 	* Time - O(n+k) (best)/worst/average case, where k = max(|min|, max) (k=n^O(1))
+	 	* Space - O(k) to store [-k, k] frequency table
+*/
 
 int main()
 {
@@ -51,10 +59,10 @@ int main()
     }
     vl b(a.size()+1,0),c(a.size()+1,0);
     fo(i,a.size())b[a[i]]++;
-    for(int i=1;i<b.size();i++)
+    for(int i=1; i<b.size(); i++)
         b[i]+=b[i-1];
     int j=0;
-    for(int i=0;i<a.size();i++)
+    for(int i=0; i<a.size(); i++)
     {
         c[b[a[i]]-1]=a[i];
         b[a[i]]--;
