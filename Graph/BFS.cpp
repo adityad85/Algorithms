@@ -35,7 +35,14 @@ int mpow(int base, int exp);
 void ipgraph(int m);
 const int mod = 1000000007;
 //=======================
-/*
+/*Problem (informal): Given starting node, traverse a graph by looking at closer nodes before further ones
+
+	 Algorithm: While nodes at depth d from root are unvisited, visit them, increment d
+
+	 Complexity:
+	 	* Time - O(|V| + |E|) where V is set of vertices and E is set of edges
+	 	* Space - O(|V|) to store visited vertices
+
 	Do a breadth-first search in this graph:
 	1--2--4--7
 	| / \    |
@@ -62,6 +69,7 @@ const int mod = 1000000007;
 #define MAX 10001
 vl g[MAX];
 vector<int>b(MAX,0);
+//A queue based implementation but an iterative implementation is much faster approx 3-4x .
 void BFS(int s)
 {
     queue<int> q;
