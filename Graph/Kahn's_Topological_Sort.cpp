@@ -61,12 +61,19 @@ void KTS()
         }
 
     }
+    if(c!=n){
+        cout<<"cycle exists";//not a DAG
+    }
     for(int i=0; i<v.size(); i++)
     {
         cout<<v[i]<<endl;
     }
 
-}
+/*  This is the algorithm which uses the in-degree concept to actually reach all the nodes in the topological order.
+   Complexity:
+      * Time: O(|V|+|E|)
+
+*/
 int main()
 {
     int e,u,v;
