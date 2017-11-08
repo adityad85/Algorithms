@@ -35,6 +35,13 @@ int mpow(int base, int exp);
 void ipgraph(int m);
 const int mod = 1000000007;
 //=======================
+/*
+
+    Topological sort is for the directed acyclic graph,for every directed edge uv, where the vertex u comes before v
+    Complexity:
+       * Time : O(|V|+|E|)
+       * Space: O(|V|) cause of stack
+*/
 #define MAX 10001
 vl g[MAX];
 vector<int>b(MAX,0);
