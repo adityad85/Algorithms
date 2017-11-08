@@ -51,7 +51,13 @@ void DFS(){
         if(!b[i])
         DFS_fun(i);
 }
-
+/* Depth-First Search (DFS)
+	 Problem (informal): Given starting node, traverse a graph by looking at deeper nodes before closer ones
+	 Algorithm: Continue down branch as far as possible, visit deepest unvisited node, backtrack
+	 Complexity:
+	 	* Time - O(|V| + |E|) where V is set of vertices and E is set of edges
+	 	* Space - O(|V|) to store visited vertices
+*/
 int main()
 {
 	ios_base::sync_with_stdio(false);
