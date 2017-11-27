@@ -36,47 +36,67 @@ void ipgraph(int m);
 const int mod = 1000000007;
 //=======================
 #define MAX 10001
+/*
+ Problem: Find the shortest path between two nodes in the fastest way possible
+
+ Algorithm: Bidirectional Search .. Proceed from both the directions, the source and the target as well and at the point of the intersection
+            stop.
+ Intersection point : As soon as the visited nodes in both the array gets visited we stop and return that node as the meeting point.
+
+ Complexity : O(b^d/2+b^d/2) as compared to the O(b^d) ,here the b is branching factor and d is depth to travel;
+  */
 vl G[MAX],v(MAX,0),p(MAX,0);
 int V;
-void BFS(queue<int>&q,vl &v,int p[]){
-int u=q.front();
-q.pop();
-for(long long e:G[u]){
-  if(!v[e]){
-    p[e]=u;
-    v[e]=1;
-    q.push(e);
-  }
-}}
-int isInter(vl &s_v,vl &t_v){
-int inter =1;
-for(int i=0;i<V;i++){
-    if(s_v[i]&&t_v[i])
-        return i;
+void BFS(queue<int>&q,vl &v,int p[])
+{
+    int u=q.front();
+    q.pop();
+    for(long long e:G[u])
+    {
+        if(!v[e])
+        {
+            p[e]=u;
+            v[e]=1;
+            q.push(e);
+        }
+    }
 }
-return -1;
+int isInter(vl &s_v,vl &t_v)
+{
+    int inter =1;
+    for(int i=0; i<V; i++)
+    {
+        if(s_v[i]&&t_v[i])
+            return i;
+    }
+    return -1;
 }
-void print(int s_p[],int t_p[],int s,int t,int inter){
+void print(int s_p[],int t_p[],int s,int t,int inter)
+{
 
     vector<long long>path;
     path.pb(inter);
     int i=inter;
-    while(i!=s){
+    while(i!=s)
+    {
         path.pb(s_p[i]);
         i=s_p[i];
     }
     reverse(path.begin(),path.end());
     i=inter;
-    while(i!=t){
+    while(i!=t)
+    {
         path.pb(t_p[i]);
         i=t_p[i];
     }
-    for(auto e:path){
+    for(auto e:path)
+    {
         cout<<e<<endl;
     }
 
 }
-int bidirSearch(int s,int d){
+int bidirSearch(int s,int d)
+{
     vl s_v(MAX,0),d_v(MAX,0);
     int s_p[MAX],d_p[MAX];
     queue<int> s_q,d_q;
@@ -87,11 +107,13 @@ int bidirSearch(int s,int d){
     d_q.push(d);
     d_v[d]=1;
     d_p[d]=-1;
-    while(!s_q.empty() &&!d_q.empty()){
+    while(!s_q.empty() &&!d_q.empty())
+    {
         BFS(s_q,s_v,s_p);
         BFS(d_q,d_v,d_p);
         inter=isInter(s_v,d_v);
-        if(inter!=-1){
+        if(inter!=-1)
+        {
             cout<<s<<" "<<d<<endl;
             cout<<"intersection"<<inter<<endl;
             print(s_p,d_p,s,d,inter);
@@ -102,11 +124,12 @@ int bidirSearch(int s,int d){
 }
 int main()
 {
-	ios_base::sync_with_stdio(false);
-	cin.tie(NULL);
-	int v,e,u;
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    int v,e,u;
     cin>>V>>e;
-    for(int i=0;i<e;i++){
+    for(int i=0; i<e; i++)
+    {
         cin>>u>>v;
         G[u].pb(v);
         G[v].pb(u);
@@ -115,6 +138,6 @@ int main()
     cin>>s>>v;
     if(bidirSearch(s,v)==-1)
         cout<<"No"<<endl;
-	return 0;
+    return 0;
 }
 
