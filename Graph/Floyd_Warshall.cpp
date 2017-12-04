@@ -35,6 +35,13 @@ int mpow(int base, int exp);
 void ipgraph(int m);
 const int mod = 1000000007;
 //=======================
+/*
+      Problem : To find the all pair shortest paths
+      Algorithm: Floyd Warshall ,Basically just run bellman ford for all the pairs and we'll have our solution.
+      Time Complexity : O(V^3)
+      Space Complexity: O(V^2),i tried to reduce it by using adjacency list , but i found out eventually that it was not going to
+                        make much difference. you'll use the matrix to store the answer and that was already v^2.
+*/
 #define MAX 10001
 long long n;
 vector<vector<long long > >d(MAX,vector<long long>(MAX));
