@@ -81,9 +81,9 @@ private:
 
         int mid=(left +right)/2;
         if(lo>mid)
-            return getValue(2*stIndex,mid+1,right,lo,hi;
-                           )if(hi<=mid)
-                       return getValue(2*stIndex,left,mid,lo,hi);
+            return getValue(2*stIndex+1,mid+1,right,lo,hi);
+        if(hi<=mid)
+            return getValue(2*stIndex,left,mid,lo,hi);
         SegmentTreeNode leftResult=getValue(2*stIndex,left,mid,lo,mid);
         SegmentTreeNode rightResult=getValue(2*stIndex+1,mid+1,right,mid+1,hi);
         SegmentTreeNode result;
@@ -116,7 +116,7 @@ private:
 
     }
 };
-
+//Implement Segment tree node value with a structure;
 int main()
 {
     ios_base::sync_with_stdio(false);
