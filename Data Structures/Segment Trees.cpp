@@ -117,6 +117,25 @@ private:
     }
 };
 //Implement Segment tree node value with a structure;
+struct SegmentTreeNode
+{
+    int maxNum,secondMaxNum;
+    void assignLeaf(int num)
+    {
+        maxNum=num;
+        secondMaxNum=-1;
+    }
+    void merge(SegmentTreeNode& left,SegmentTreeNode& right)
+    {
+        maxNum=max(left.maxNum,right.maxNum);
+        secondMaxNum=min(max(left.maxNum,right.secondMaxNum),max(right.maxNum,left.secondMaxNum));
+    }
+    int getValue()
+    {
+        return maxNum+secondMaxNum;
+    }
+
+};
 int main()
 {
     ios_base::sync_with_stdio(false);
