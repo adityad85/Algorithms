@@ -57,7 +57,7 @@ int main()
     {
         if(n&(1))
         {
-            ans=1*base+ans;
+            ans=1*base+ans;//take care of the limits
             s+="1";
         }
         else
