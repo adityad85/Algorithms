@@ -51,11 +51,11 @@ void max_heap(int a[],int i,int n)
         max_heap(a,largest,n);
     }
 }
-void build_heap(int arr[],int n)
+void build_heap(int arr[],int n)  //use it to make the heap
 {
     for(int i=n/2; i>=1; i--)
     {
-        max_heap(arr,i,n);
+        max_heap(arr,i,n);   //max heap to build the greater element at the top
     }
 }
 /*
