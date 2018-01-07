@@ -35,20 +35,15 @@ int mpow(int base, int exp);
 void ipgraph(int m);
 const int mod = 1000000007;
 //=======================
-/*
-    O(log n) to call max heap
-    O(n) to build heap
-
-*/
 void max_heap(int a[],int i,int n)
 {
-    int left = 2*i;
-    int right=2*i+1,largest;
-    if(left<=n && a[i]<a[left] )
+    int left =2*i;
+    int right = 2*i+1,largest;
+    if(left<=n && a[left]>a[i])
         largest=left;
     else
         largest=i;
-    if(right <=n && a[largest]<a[right])
+    if(right<=n && a[right]>a[largest])
         largest=right;
     if(largest!=i)
     {
@@ -56,37 +51,38 @@ void max_heap(int a[],int i,int n)
         max_heap(a,largest,n);
     }
 }
-void build_heap(int arr[],int n)  //use it to make the heap
+void build_heap(int a[],int n)
 {
     for(int i=n/2; i>=1; i--)
     {
-        max_heap(arr,i,n);   //max heap to build the greater element at the top
+        max_heap(a,i,n);
     }
+
 }
-/*
 void heap_sort(int a[],int n)
 {
     build_heap(a,n);
-    int l =n;
+    int l=n;
     for(int i=n; i>=2; i--)
     {
-        swap(a[i],a[1]);
+        swap(a[1],a[i]);
         l=l-1;
         max_heap(a,1,l);
     }
+
 }
-*/
 int main()
 {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
     int a[7];
-    for(int i=1;i<=6;i++)
+    for(int i=1; i<=6; i++)
         cin>>a[i];
-    max_heap(a,6);
+    heap_sort(a,6);
 
-    for(int i=1;i<=6;i++)
+    for(int i=1; i<=6; i++)
         cout<<a[i]<<" ";
+
     return 0;
 }
 
