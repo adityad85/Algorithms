@@ -60,14 +60,14 @@ int randomPartition (int a[],int l,int r)
 }
 int  kthSmallest (int a[],int l,int r,int k)
 {
-    if(k>0)
+    if(k>0&& k<=r-l+1)
     {
         int pos=randomPartition(a,l,r);
-        if(k==pos)
+        if(k-1==pos-l)
             return a[pos];
         if(pos-l>k-1)
             return kthSmallest(a,l,pos-1,k);
-        return kthSmallest(a,pos+1,r,k-pos+1);
+        return kthSmallest(a,pos+1,r,k-pos+l-1);
     }
 
     return INT_MAX;
