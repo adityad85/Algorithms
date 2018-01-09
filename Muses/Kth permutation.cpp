@@ -43,13 +43,13 @@ int factorial(int n)
         f*=i;
     return f;
 }
-void permutationHelper(vector<int >& num, int k, string& ss)
+void permutationHelper(vector<int >& num, int k, stringstream& ss)
 {
 
     if(num.size()==0)return;
     int f = factorial(num.size()-1);
     int inc = k/f;    //allows you to skip over the permutations
-    ss+=to_string(num[inc]);
+    ss<<to_string(num[inc]);
     num.erase(num.begin()+inc);
     permutationHelper(num,k%f,ss); //recurse over the left part
 }
@@ -60,11 +60,9 @@ string getpermute(int n,int k)
     vector<int >num(n);
     for(int i=0; i<n; i++)
         num[i]=i+1;
-    string ss;
+    stringstream ss;
     permutationHelper(num,k,ss);
-    return ss;
-
-
+    return ss.str();
 }
 int main()
 {
