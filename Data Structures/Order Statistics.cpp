@@ -50,7 +50,7 @@ int main()
     x.erase(3); // delete the number
     int k;
     cin>>k;
-    cout<<*x.find_by_order(k)<<"\n"; //find the number present at this point
+    cout<<*x.find_by_order(k)<<"\n"; //find the number present at this point at this rank
     int a;
     cin >>a;
     cout<<*x.upper_bound(a)<<"\n"; //find the number after the given number
