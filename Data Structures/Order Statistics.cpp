@@ -38,7 +38,8 @@ int mpow(int base, int exp);
 void ipgraph(int m);
 const int mod = 1000000007;
 //=======================
-typedef tree <int , null_type,less<int>,rb_tree_tag,tree_order_statistics_node_update>pbds;
+typedef tree <int , null_type,less<int>,rb_tree_tag,tree_order_statistics_node_update>pbds;//include this as well
+//include two special files for policy based data structure as mentioned above
 int main()
 {
 	ios_base::sync_with_stdio(false);
@@ -54,6 +55,7 @@ int main()
     int a;
     cin >>a;
     cout<<*x.upper_bound(a)<<"\n"; //find the number after the given number
+	cout<<x.order_of_key(a);//gives the order as its visible
 	return 0;
 }
 
