@@ -35,6 +35,18 @@ int mpow(int base, int exp);
 void ipgraph(int m);
 const int mod = 1000000007;
 //=======================
+/*
+  Problem : find the kth smallest number
+
+  Algorithm : Ordered Statistics ;
+              Use the quick sort algorithm to know the rank of the element
+              instead of sorting .
+
+
+  Running Time : O(n) expected run time
+               *Worst case O(n^2);
+
+*/
 int partition(int a[],int l,int r)
 {
     int x=a[r],i=l;
@@ -52,6 +64,9 @@ int partition(int a[],int l,int r)
 }
 int randomPartition (int a[],int l,int r)
 {
+    /*
+     it takes a number in the range and swaps it with the last element
+    */
     int n=r-l+1;
     int pivot=rand()%n ;
     swap(a[l+pivot],a[r]);
@@ -63,13 +78,14 @@ int  kthSmallest (int a[],int l,int r,int k)
     if(k>0&& k<=r-l+1)
     {
         int pos=randomPartition(a,l,r);
+        //pos - l is done specifically to make sure that the k is compared with the right rank
         if(k-1==pos-l)
             return a[pos];
         if(pos-l>k-1)
             return kthSmallest(a,l,pos-1,k);
         return kthSmallest(a,pos+1,r,k-pos+l-1);
     }
-
+// recurse on the left and the right but when on the right make sure that you change the key accordingly
     return INT_MAX;
 }
 
