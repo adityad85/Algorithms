@@ -35,14 +35,14 @@ int mpow(int base, int exp);
 void ipgraph(int m);
 const int mod = 1000000007;
 //=======================
-typedef struct node
+typedef struct node   // to create the node and defining as the node
 {
     int data;
     struct node * left ;
     struct node * right;
 } node;
 node *root=NULL;
-node* newnode(int n)
+node* newnode(int n)//easy implementation of the new node creation
 {
     node *temp=(node*)malloc(sizeof(int));
     temp->data=n;
@@ -50,7 +50,7 @@ node* newnode(int n)
     return temp;
 
 }
-int maxdepth(node *node)
+int maxdepth(node *node) // measures the depth of the nodes in the tree
 {
     if(node == NULL)
         return 0;
