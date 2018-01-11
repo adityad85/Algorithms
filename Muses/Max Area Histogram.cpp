@@ -35,58 +35,50 @@ int mpow(int base, int exp);
 void ipgraph(int m);
 const int mod = 1000000007;
 //=======================
-template <typename T>
-class QueueWithMin
+int area (vi A)
 {
-private:
-    queue <T> q;
-    deque<T>d;
-public:
-    void enque(const T& x)
-    {
-        q.push(x);
-        while(!d.empty()&& d.back()>x)  // store the deque in decreasingg order meaning larger at the front and min at the back ,to assure we
-        d.pop_back();
-        d.push_back(x);
-        //we have new minimum in the game.so,rest are useless ,pop'em all until less then the local min reached.
+    int n= A.size();
+    vi pR(n);
+    stack<int>S;
+    for(int i=n-1; i>=0; i--)
+    {  /*
+        It gives the right end index till which the current has the local maxima.
+        means the right index till which it can compute the area.as soon as it touches
+        a height less than the current one . it wont be able to include that area for the current height.
+        */
+        while(!S.empty()&& A[S.top()]>=A[i])
+            S.pop();
+        pR[i]=S.empty()?n-1:S.top()-1;
+        S.push(i);
     }
-    T dequeue()
+    while(!S.empty())S.pop();
+    int maxa=0;
+    for(int i=0; i<n; i++)
     {
-        if(q.empty())
-            throw "error";
-        if(d.front()==q.front())
-            d.pop_front();
-        T a= q.top();
-        q.pop();
-        return a;
+        while (!S.empty()&& A[S.top()]>=A[i])
+            S.pop();
+        long long area= A[i]*(pR[i]+1-(S.empty()?0:S.top()+1));
+        if(area > maxa)
+            maxa =area;
+        S.push(i);
 
     }
-    T getmin()
-    {
-        return d.front();
-    }
-    int size()
-    {
-        return q.size();
-    }
-
-    bool empty ()
-    {
-        return q.empty();
-    }
-
-} ;
-
+    return maxa;
+}
 int main()
 {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
-    QueueWithMin<int> q;
-    q.enque(5);
-    q.enque(4);
-    q.enque(3);
-    q.enque(2);
-    cout<<q.getmin();
-        return 0;
+    vi a;
+    int n,i,d;
+    cin>>n;
+    fo(i,n)
+    {
+        cin>>d;
+        a.pb(d);
+    }
+    cout<<area2(a);
+
+    return 0;
 }
 
