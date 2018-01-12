@@ -35,74 +35,25 @@ int mpow(int base, int exp);
 void ipgraph(int m);
 const int mod = 1000000007;
 //=======================
-typedef struct node
+int horner(int a[],int n,int x)
 {
-    int data;
-    struct node* next;
-} node;
-int cycles(node *a)//O(N)
-{
-    node *s=a,*f=a;
-    while(f&&f->next)
+    int i,result=a[0];
+    Fo(i,1,n)
     {
-        s=s->next;
-        f=f->next->next;
-        if(s==f){
-                cout<<"yup";
-            break;}
+        result=result*x+a[i];
     }
-    if(f==NULL||f->next==NULL)return -1; //frustrated me a lot , actually tried to .But,Nothing can...
-    for(f=a;s!=f;s=s->next,f=f->next);
-        return s->data;
+    return result;
 }
-void build_cycle(node* a,int o)//O(N)
-{   srand(time(NULL));
-    node* p=a,*q=a;
-    int n=(rand()%(rand()+1))%o;
-    cout<<n<<"rand";
-    while(n--)
-    {
-        q=q->next;
-    }
-    while(p->next)
-        p=p->next;
-    p->next=q;
-    cout<<"aa";
-}
-void print (node* a){
-node* p=a;
-while(p!=NULL){
-    cout<<p->data;
-    p=p->next;}
-}
+
 int main()
 {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
-    node* a=NULL,*p;
-
-    int n,d;
-    cin>>n;
-    while(n--){
-        cin>> d;
-            node* t=(node*)malloc(sizeof(int));
-        t->data=d;
-        t->next=NULL;
-        if(a==NULL)
-        {
-            a=t;
-            p=a;
-        }
-        else
-        {
-            p->next=t;
-            p=p->next;
-        }
-    }
-    build_cycle(a,n);
-    //print(a);
-    cout<<cycles(a);
+    //2x3 - 6x3 + 2x -1 for x=3;
+    int a[]= {2,-6,2,-1};
+    int x=3;
+    int n=4;
+    cout<<horner(a,n,x);
     return 0;
 }
-
 
