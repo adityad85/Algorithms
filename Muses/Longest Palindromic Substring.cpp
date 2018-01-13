@@ -41,10 +41,11 @@ string longestpalindrome(string a)//O(n^2) n^2 space requirements
     vector<vector<bool> > p(n+1,vector<bool>(n+1,true));
     int start=0,len=1;
     int i,j;
-    for(i=1; i<n; i++)
+    for(i=1; i<n; i++)  //it's acting as the length
     {
-        for(j=1; j<=n-i; j++)
+        for(j=1; j<=n-i; j++)  // and this as the starting point
         {
+
             p[j][i+j]=p[j+1][i+j-1]&&(a[j-1]==a[j+i-1]);
             if(p[j][j+i]&&i+1>len)
                 start=j-1,len=i+1;
