@@ -35,48 +35,13 @@ int mpow(int base, int exp);
 void ipgraph(int m);
 const int mod = 1000000007;
 //=======================
-int power(int m,int n)//repeated squaring
-{
-    if(m==0)
-        return 1;
-    int ans=pow(m,n/2);
-    ans=ans*ans;
-    if(n&1)//even odd check
-         ans=ans*m;
-    return ans;
 
-}
-void powerset(vector<char> a,int n){
-vector<string >s;
-string str="";
-int l=power(2,n);
-for(int i=0;i<l;i++){
 
-    for(int j=0;j<n;j++){
-        if(i&1<<j)
-            str+=a[j];
-    }
-    //cout<<str<<"\n";
-    s.pb(str);
-    str="";
-
-}
-int i=0;
-fo(i,l)
-    cout<<s[i]<<endl;
-
-}
 int main()
 {
-    ios_base::sync_with_stdio(false);
-    cin.tie(NULL);
-    int n,i;
-    cin>>n;
-    vector<char>a(n);
-    fo(i,n)
-    cin>>a[i];
-    powerset(a,n);
-    //cout<<power(2,3);
-    return 0;
+	ios_base::sync_with_stdio(false);
+	cin.tie(NULL);
+
+	return 0;
 }
 

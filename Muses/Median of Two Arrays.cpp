@@ -35,48 +35,39 @@ int mpow(int base, int exp);
 void ipgraph(int m);
 const int mod = 1000000007;
 //=======================
-int power(int m,int n)//repeated squaring
+int getOrderStatistics(const vector<int>& A,int as,int ae,const vector<int>&B,int bs,int be,int k )
 {
-    if(m==0)
-        return 1;
-    int ans=pow(m,n/2);
-    ans=ans*ans;
-    if(n&1)//even odd check
-         ans=ans*m;
-    return ans;
-
+    int n=ae-as+1,m=be-bs+1;
+    if(n>m)
+        return getOrderStatistics(B,bs,be,A,as,ae,k);
+    if(n<=0)
+        return B[bs+k-1];
+    if(k==1)
+        return min(A[as],B[bs]);
+    int pa=min(k/2,n),pb=k-pa;
+    return A[as+pa-1]<=B[bs+pb-1]?getOrderStatistics(A,as+pa,ae,B,bs,bs+pb-1,k-pa)
+           :
+           getOrderStatistics(A,as,as+pa-1,B,bs+pb,be,k-pb);
 }
-void powerset(vector<char> a,int n){
-vector<string >s;
-string str="";
-int l=power(2,n);
-for(int i=0;i<l;i++){
-
-    for(int j=0;j<n;j++){
-        if(i&1<<j)
-            str+=a[j];
-    }
-    //cout<<str<<"\n";
-    s.pb(str);
-    str="";
-
-}
-int i=0;
-fo(i,l)
-    cout<<s[i]<<endl;
-
+double findMedianSortedArrays(const vector<int>&A,const vector<int>&B)
+{
+    int n=A.size(),m=B.size();
+    return (n+m)%2!=0?getOrderStatistics(A,0,n-1,B,0,m-1,(n+m)/2+1)
+    :
+        (getOrderStatistics(A,0,n-1,B,0,m-1,(n+m)/2)+getOrderStatistics(A,0,n-1,B,0,m-1,(n+m)/2+1))/2.0;
 }
 int main()
 {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
-    int n,i;
-    cin>>n;
-    vector<char>a(n);
-    fo(i,n)
-    cin>>a[i];
-    powerset(a,n);
-    //cout<<power(2,3);
+    int n,m,i;
+    cin>>n>>m;
+    vi a(n),b(m);
+    fo(i,n)cin>>a[i];
+    fo(i,m)cin>>b[i];
+    double ans=findMedianSortedArrays(a,b);
+    cout<<ans;
+
     return 0;
 }
 
