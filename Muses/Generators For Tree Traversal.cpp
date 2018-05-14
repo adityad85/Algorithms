@@ -1,4 +1,5 @@
 #include <bits/stdc++.h>
+#include<iterator>
 // #include "stdafx.h"
 // #pragma warning(disable : 4996) //_CRT_SECURE_NO_WARNINGS
 using namespace std;
@@ -39,27 +40,164 @@ const int mod = 1000000007;
 Problem: To traverse a BST anytime on demand to find the number whose sum is equal to the given number.
 
 */
-class BST
+struct BSTnode
+{
+    int data;
+    BSTnode *left=NULL,*right=NULL;
+};
+stack<BSTnode*>peace1;
+stack<BSTnode*>peace2;
+typedef struct
+{
+    int a,b;
+} tuple1;
+/*class BST
 {
 
-    struct BSTnode
-    {
-        int data;
-        BSTnode *left=NULL,*right=NULL;
-    };
-    BSTnode *bst;
-    BST(int a=0)
-    {
-        bst->data=a;
 
+    BSTnode *bt;
+    BST(BSTnode *bst1)
+    {
+        bt->data=bst1->data;
+        bt->left=bst1->left;
+        bt->right=bst1->right;
+
+    }*/
+BSTnode* insert1(BSTnode *root,int data)
+{
+    if(root == NULL)
+    {   //cout<<1;
+        root=(BSTnode*)malloc(sizeof(BSTnode));
+        root->data=data;
+        //cout<<root->data;
+        return root;
+    }
+    else
+    {
+        if(data<=root->data)
+            root->left=insert1(root->left,data);
+        else
+            root->right=insert1(root->right,data);
+
+        return root;
     }
 
-};
+}
+BSTnode* inorderFromStart(BSTnode *bst)
+{
+    peace1.push(bst);
+    while(bst->left!=NULL)
+    {
+        bst=bst->left;
+        peace1.push(bst);
+
+    }
+    while(!peace1.empty())
+    {
+        BSTnode *top = peace1.top();
+        peace1.pop();
+        if(top->right!=NULL)
+        {
+            bst=top->right;
+            peace1.push(bst);
+            while(bst->left!=NULL)
+            {
+                bst=bst->left;
+                peace1.push(bst);
+            }
+        }
+    return top;
+
+    }
+    return NULL;
+}
+BSTnode* inorderFromEnd(BSTnode *bst)
+{
+    peace2.push(bst);
+    while(bst->right!=NULL)
+    {
+        bst=bst->right;
+        peace2.push(bst);
+    }
+    while(!peace2.empty())
+    {
+        BSTnode *top=peace2.top();
+        peace2.pop();
+        if(top->left!=NULL)
+        {
+            bst=top->left;
+            peace2.push(bst);
+            while(bst->right!=NULL)
+            {
+                bst=bst->right;
+                peace2.push(bst);
+            }
+        }
+        return top;
+    }
+    return NULL;
+
+}
+
+//};
+tuple1 twoSum(BSTnode* bst,int k)
+{
+    if(bst==NULL)return {0,0};
+    cout<<"in";
+    BSTnode *bstStart=inorderFromStart(bst);
+    BSTnode *bstEnd=inorderFromEnd(bst);
+    BSTnode *start=bstStart;
+    peace1.pop();
+    BSTnode *end1= bstEnd;
+    peace2.pop();
+    while(start!=end1&&!peace1.empty()&&!peace2.empty())
+    {//cout<<1121212121;
+        if(start->data+end1->data==k)return {start->data,end1->data};
+        else if(start->data+end1->data>k)
+            {end1=peace2.top();
+            peace2.pop();}
+        else {//start=std::next(start);
+            start=peace1.top();
+            peace1.pop();
+            }
+
+    }
+    return {0,0};
+}
+void inorder(BSTnode *root)
+{
+    if(root)
+    {
+        inorder(root->left);
+        printf("%d",root->data);
+        inorder(root->right);
+    }
+
+}
+void inhere(BSTnode *n){
+    n=inorderFromStart(n);
+    cout<<n->data;
+   while(!peace1.empty()){
+         n=peace1.top();
+        peace1.pop();
+        cout<<n->data;
+        }
+}
 int main()
 {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
-
+    BSTnode *bstz=NULL ;
+    bstz=insert1(bstz,5);
+    insert1(bstz,3);
+    insert1(bstz,1);
+    insert1(bstz,2);
+    insert1(bstz,4);
+    insert1(bstz,7);
+    insert1(bstz,6);
+    //inhere(bstz);
+    tuple1 a=twoSum(bstz,10);
+    cout<<a.a<<a.b;
     return 0;
 }
 
